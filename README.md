@@ -99,12 +99,13 @@ panopticon/
 
 <table>
 <tr>
-<td width="50%">
+<td width="50%" align="center" valign="top">
 <a href="https://youtu.be/l281cGm2agY?si=GzG0Sy5uGpbCk7HT">
 <img src="https://img.youtube.com/vi/l281cGm2agY/0.jpg" alt="Watch the video" width="100%"/>
 </a>
+<p><i>🎥 영상을 클릭하면 YouTube로 이동합니다</i></p>
 </td>
-<td width="50%">
+<td width="50%" align="center" valign="top">
 <img src="docs/images/포스터.png" alt="Panopticon Poster" width="100%"/>
 </td>
 </tr>
