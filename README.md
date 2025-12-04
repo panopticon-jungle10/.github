@@ -60,8 +60,17 @@ Panopticon은 마이크로서비스 아키텍처 환경에서 발생하는 **장
 
 SLO(Service Level Objective) 기반으로 가용성, 레이턴시, 에러율 임계값을 설정하고, 실시간 모니터링 데이터와 비교하여 목표 미달 시 즉시 알림을 발송합니다. Slack, Discord, Email 등 외부 서비스 연동을 통해 장애 상황을 팀 전체에 신속하게 공유하여 빠른 대응을 가능하게 합니다.
 
-### 전체 구조
+## 🎨 전체 구조
 
+Panopticon은 **데이터 수집 → 처리 → 저장 → 시각화**의 파이프라인으로 구성되어 있습니다:
+
+1. **데이터 수집 계층**: Monitoring SDK가 애플리케이션에서 Traces, Logs를 수집
+2. **수집 및 전처리 계층**: ProducerServer가 데이터를 수신하고 Kafka 토픽에 발행
+3. **저장 계층**: OpenSearch에 시계열 데이터를 Data Stream으로 저장 (logs, traces. errors)
+4. **집계 계층**: Aggregator가 1분 단위로 메트릭을 사전 집계하여 metrics-apm에 저장하고, Redis로 결과 캐싱
+5. **조회 계층**: Query API가 OpenSearch와 Redis를 통해 메트릭, 트레이스, 로그 데이터를 제공
+6. **시각화 계층**: Frontend에서 사용자에게 직관적인 대시보드 제공
+7. **알림 계층**: SLO 위반 시 Slack/Discord/Email로 알림 발송
 
 ## 🛠 기술 스택
 
@@ -72,6 +81,7 @@ panopticon/
 ├── panopticon-frontend/           # Panopticon 웹 UI (실시간 모니터링, 트레이스 분석, SLO 알림 등)
 ├── panopticon-backend/            # Panopticon 백엔드 API 서버 (데이터 수집, 저장, 분석 등)
 ├── panopticon-demo-service/       # 데이터 발생용 QnA 게시판 서비스 LogQ
+├── panopticon-auth-server/        # Panopticon 모니터링 플랫폼의 중앙 인증 서버
 └── panopticon-monitoring-sdk/     # 모니터링 SDK 라이브러리 모음
 ```
 
@@ -85,7 +95,22 @@ panopticon/
 
 ## 🎬 프로젝트 시연 영상
 
-[![Watch the video](https://img.youtube.com/vi/l281cGm2agY/0.jpg)](https://youtu.be/l281cGm2agY?si=GzG0Sy5uGpbCk7HT)
+<div align="center">
+
+<table>
+<tr>
+<td width="50%">
+<a href="https://youtu.be/l281cGm2agY?si=GzG0Sy5uGpbCk7HT">
+<img src="https://img.youtube.com/vi/l281cGm2agY/0.jpg" alt="Watch the video" width="100%"/>
+</a>
+</td>
+<td width="50%">
+<img src="docs/images/포스터.png" alt="Panopticon Poster" width="100%"/>
+</td>
+</tr>
+</table>
+
+</div>
 
 ## 👥 팀원 소개
 
