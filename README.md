@@ -62,14 +62,6 @@ SLO(Service Level Objective) 기반으로 가용성, 레이턴시, 에러율 임
 
 ### 전체 구조
 
-Panopticon은 **데이터 수집 → 처리 → 저장 → 시각화**의 파이프라인으로 구성되어 있습니다:
-
-1. **데이터 수집 계층**: Monitoring SDK가 애플리케이션에서 Metrics, Traces, Logs를 수집
-2. **수집 및 전처리 계층**: OpenTelemetry Collector가 데이터를 수신하고 정규화
-3. **저장 계층**: ClickHouse에 시계열 데이터를 저장하고 Redis로 실시간 캐싱
-4. **분석 계층**: Backend API가 데이터를 집계하고 분석
-5. **시각화 계층**: Frontend에서 사용자에게 직관적인 대시보드 제공
-6. **알림 계층**: SLO 위반 시 Slack/Discord/Email로 알림 발송
 
 ## 🛠 기술 스택
 
